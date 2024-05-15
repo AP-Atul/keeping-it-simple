@@ -4,5 +4,5 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": "always"
   },
-  "conventionalCommits.scopes": ["env", "auth", "storage"]
+  "conventionalCommits.scopes": ["env", "auth", "storage", "tutors", "subjects"]
 }
