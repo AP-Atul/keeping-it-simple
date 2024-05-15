@@ -11,23 +11,22 @@ const config = {
   auth: {
     jwtsecret: process.env.JWT_SECRET || 'pp~f}dbkwd]k1qpp@n1<:lljptymffd]k1q~f}dbkwdt>',
     hashRounds: 10
-  },
+  }
 }
 
 const prod = _.mergeRight(config, {
   db: {
     url: process.env.DB
-  },
+  }
 })
 
 const test = _.mergeRight(config, {
   db: {
     url: process.env.DB_TEST
-  },
+  }
 })
 
 export = (function () {
-  console.log(`Env= ${process.env.NODE_ENV}`)
   switch (process.env.NODE_ENV) {
     case 'production':
       return prod
