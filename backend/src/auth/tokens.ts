@@ -14,6 +14,10 @@ interface Tokens {
   refresh_token: string
 }
 
+interface AuthToken {
+  auth_token: string
+}
+
 interface Decoded {
   user: string
   session: string
@@ -55,4 +59,23 @@ export const create = async (
     expiry: moment().add(1, 'd').toISOString()
   })
   return { auth_token: auth, refresh_token: refresh.id }
+}
+
+
+export const createAnon = async (
+  expiry: 'short' | 'long' = 'short'
+): Promise<AuthToken> => {
+  const session = await repo.saveSession({ user_id: null })
+  const auth = jwt.sign(
+    {
+      user: 'anonymous',
+      session: session.id,
+      scope: ['anon']
+    },
+    config.auth.jwtsecret,
+    {
+      expiresIn: expiry === 'short' ? '59m' : '1d'
+    }
+  )
+  return { auth_token: auth }
 }

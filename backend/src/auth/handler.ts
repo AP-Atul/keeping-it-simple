@@ -41,6 +41,14 @@ export const signin = async (
   return responses.data(h, { ...tokens, user: _.omit(['password'], existing) })
 }
 
+export const signinAnon = async (
+  _: hapi.Request,
+  h: hapi.ResponseToolkit
+): Promise<hapi.ResponseObject> => {
+  const tokens = await jwtTokens.createAnon()
+  return responses.data(h, { ...tokens, })
+}
+
 export const logout = async (
   request: hapi.Request,
   h: hapi.ResponseToolkit

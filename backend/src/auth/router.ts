@@ -61,4 +61,16 @@ export const register = (server: hapi.Server): void => {
       notes: 'Fails with 401; if data is invalid'
     }
   })
+
+  server.route({
+    method: 'post',
+    path: '/auth/anon-signin',
+    options: {
+      handler: overlook(handler.signinAnon),
+      tags: ['api', 'auth', 'anon'],
+      auth: false,
+      description: 'Returns auth tokens for anon user',
+      notes: 'Fails with 401; if data is invalid'
+    }
+  })
 }
