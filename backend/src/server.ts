@@ -7,10 +7,8 @@ import * as auth from './auth/router'
 import * as jwtTokenValidator from './auth/tokens'
 import config from './config'
 import * as diagnostic from './diagnostic/router'
-import { StorageService } from './integrations/storage/storage_service'
-import * as storage from './storage/router'
 
-export const init = async (storageService: StorageService): Promise<hapi.Server> => {
+export const init = async (): Promise<hapi.Server> => {
   // Hapi JS server initialization
   const server = hapi.server({
     port: config.port,
@@ -62,7 +60,6 @@ export const init = async (storageService: StorageService): Promise<hapi.Server>
   // initialize routers
   diagnostic.register(server)
   auth.register(server)
-  storage.register(server, storageService)
 
   await server.initialize()
   return server

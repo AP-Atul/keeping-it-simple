@@ -133,6 +133,18 @@ describe('sign in apis', async () => {
   })
 })
 
+
+describe('anon sign in apis', async () => {
+  it('should return 200 for anon user', async () => {
+    await create()
+    const response = await testEnv.server.inject({
+      method: 'post',
+      url: '/auth/anon-signin',
+    })
+    expect(response.statusCode).eq(200)
+  })
+})
+
 describe('refresh apis', async () => {
   it('should return 200 for valid user', async () => {
     const signin = await create()
