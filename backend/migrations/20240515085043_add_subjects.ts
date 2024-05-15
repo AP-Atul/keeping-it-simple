@@ -2,7 +2,7 @@ import type { Knex } from 'knex'
 
 export async function up(knex: Knex): Promise<void> {
   const query = `
-    create type available_curriculums as enum ('VCE', 'WACE', 'HSC', 'QCE' , 'IB', 'EXECUTIVE');
+    create type available_curriculums as enum ('VCE', 'WACE', 'HSC', 'QCE' , 'IB');
 
     create table public.subjects (
         created_at timestamptz default now(),
