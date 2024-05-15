@@ -12,39 +12,18 @@ const config = {
     jwtsecret: process.env.JWT_SECRET || 'pp~f}dbkwd]k1qpp@n1<:lljptymffd]k1q~f}dbkwdt>',
     hashRounds: 10
   },
-  storage: {
-    buckets: {
-      media: 'media'
-    },
-    maxSize: 1048576 * 2,
-    local: {
-      directory: 'user-media'
-    },
-    aws: {
-      accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
-      secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || ''
-    }
-  }
 }
 
 const prod = _.mergeRight(config, {
   db: {
     url: process.env.DB
   },
-  storage: {
-    ...config.storage,
-    service: 'local'
-  }
 })
 
 const test = _.mergeRight(config, {
   db: {
     url: process.env.DB_TEST
   },
-  storage: {
-    ...config.storage,
-    service: 'aws'
-  }
 })
 
 export = (function () {

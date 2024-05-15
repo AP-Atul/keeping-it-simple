@@ -1,6 +1,5 @@
 import * as hapi from '@hapi/hapi'
 import knex from '../src/db/db'
-import { MockStorageService } from '../src/integrations/storage/mock_storage_service'
 import { init } from '../src/server'
 
 export type TestServerEnvironment = {
@@ -21,8 +20,7 @@ const resetDB = async () => {
 
 export const getTestEnv = async (): Promise<TestServerEnvironment> => {
   if (testEnv != undefined) return testEnv
-  const storage = new MockStorageService()
-  const server = await init(storage)
+  const server = await init()
   await knex.migrate.rollback()
   await knex.migrate.latest()
   testEnv = {

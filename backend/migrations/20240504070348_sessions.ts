@@ -9,7 +9,7 @@ export async function up(knex: Knex): Promise<void> {
         updated_at timestamptz default now(),
         id uuid primary key default gen_random_uuid(),
         
-        roles text default 'anon investor',
+        roles text default 'anon students',
         first_name text,
         last_name text,
         email text unique,
