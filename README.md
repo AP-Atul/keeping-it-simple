@@ -48,6 +48,7 @@ Achieve your academic potential
 
    - Ideally all values for filters should be fetched from backend with APIs. But in this case, we can keep it constants.
    - Add a cross to remove the filter.
+   - Can add unit tests for widgets/views (react-testing-library)
 
 ### Feature Improvements
 
