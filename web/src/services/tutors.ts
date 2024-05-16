@@ -5,7 +5,10 @@ import client from "./client";
 export const search = async (options: SearchTutor) => {
   try {
     const response = await client.get("/tutors/search", {
-      params: _.omitBy(options, _.isEmpty),
+      params: _.omitBy(options, (value): boolean => {
+        if (typeof value === "number") return false;
+        return _.isEmpty(value);
+      }),
     });
     return response.data;
   } catch (err) {
