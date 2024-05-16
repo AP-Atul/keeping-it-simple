@@ -21,3 +21,15 @@ export const profile = async (tutorId: string) => {
     return undefined;
   }
 };
+
+export const request = async (
+  tutorId: string,
+  data: { name: string; message: string }
+) => {
+  try {
+    const response = await client.put(`/tutors/${tutorId}/request`, data);
+    return response.status === 200;
+  } catch (err) {
+    return false;
+  }
+};

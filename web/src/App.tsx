@@ -11,7 +11,7 @@ function App() {
     signInAnon();
   });
   return (
-    <Theme>
+    <Theme appearance="light">
       <BrowserRouter basename="/">
         <Routes>
           <Route path="/" Component={Home} />
