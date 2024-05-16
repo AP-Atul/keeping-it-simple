@@ -17,8 +17,7 @@
     "db:setup": "chmod +x ./scripts/setup_db.sh && ./scripts/setup_db.sh && npx knex seed:run",
     "db:seed": "npx knex seed:run",
     "prettier-fix": "npx prettier --write  src test",
-    "test": "export NODE_ENV=test && npx mocha -r ts-node/register --exit --timeout 5000 test/**/*.spec.ts -- --silent",
-    "test:cov": "export NODE_ENV=test && npx nyc --reporter=text mocha -r ts-node/register  --exit --timeout 5000 test/**/*.spec.ts -- --silent",
+    "test": "export NODE_ENV=test && npx nyc --reporter=text mocha -r ts-node/register  --exit --timeout 5000 test/**/*.spec.ts -- --silent",
     "test:watch": "export NODE_ENV=test && npx mocha -w  --watch-files src/ test/ -r ts-node/register test/**/*.spec.ts"
   },
   "eslintConfig": {

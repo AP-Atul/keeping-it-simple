@@ -11,6 +11,9 @@ const config = {
   auth: {
     jwtsecret: process.env.JWT_SECRET || 'pp~f}dbkwd]k1qpp@n1<:lljptymffd]k1q~f}dbkwdt>',
     hashRounds: 10
+  },
+  pagination: {
+    limit: 20
   }
 }
 

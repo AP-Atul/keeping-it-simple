@@ -62,7 +62,6 @@ export const createSampleTutor = async (
   }
   if (entity) {
     const updated = mergeLeft(entity, sample)
-    console.log('updated', updated)
     return (await tutorRepo.save(updated)) as Tutor
   }
   return (await tutorRepo.save(sample)) as Tutor

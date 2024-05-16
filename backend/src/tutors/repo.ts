@@ -1,4 +1,5 @@
 import slugify from 'slugify'
+import config from '../config'
 import db, { tables } from '../db/db'
 import { SaveTutor, SearchTutor, Tutor, TutorSortOrder } from './types'
 
@@ -34,6 +35,7 @@ export const save = async (tutor: SaveTutor, knex = db): Promise<Tutor | undefin
 
 export const search = async (options: SearchTutor) => {
   // joining tutors <> subjects <> tutors_subjects
+  const offset = options.page > 0 ? config.pagination.limit * (options.page - 1) : 0
   const query = db
     .select(`${tables.tutors}.*`, db.raw(`jsonb_agg(${tables.subjects}.*) as subjects`))
     .from(tables.tutors)
@@ -49,6 +51,8 @@ export const search = async (options: SearchTutor) => {
     )
     .orderBy(...tutorOrderSequence(options.sort))
     .groupBy([`${tables.tutors}.id`])
+    .limit(config.pagination.limit)
+    .offset(offset)
 
   // optional where clauses
   if (options.query) {
