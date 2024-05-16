@@ -12,6 +12,7 @@ export const search = joi
     sort: joi
       .string()
       .valid(...Object.values(TutorSortOrder))
-      .default(TutorSortOrder.atar_desc)
+      .default(TutorSortOrder.atar_desc),
+    page: joi.number().default(0)
   })
   .label('Search tutors')

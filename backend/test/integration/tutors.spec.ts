@@ -1,5 +1,6 @@
 import { expect } from 'chai'
-import { Tutor } from 'src/tutors/types'
+import config from '../../src/config'
+import { Tutor } from '../../src/tutors/types'
 import { TestServerEnvironment, createSampleTutor, getTestEnv } from '../environment'
 
 let env: TestServerEnvironment
@@ -46,5 +47,26 @@ describe('tutor search api', () => {
     expect(response.statusCode).eq(200)
     expect(response.result).length(1)
     expect(response.result![0].id).eq(tutor.id)
+  })
+})
+
+describe('tutor pagination', () => {
+  it('should respect pagination parameters', async () => {
+    // creating random tutors
+    await Promise.all(
+      Array(50)
+        .fill(null)
+        .map(() => createSampleTutor())
+    )
+    const auth = await signin()
+    const response = await env.server.inject<Tutor[]>({
+      method: 'get',
+      url: `/tutors/search`,
+      headers: {
+        authorization: auth.auth_token
+      }
+    })
+    expect(response.statusCode).eq(200)
+    expect(response.result).length(config.pagination.limit)
   })
 })

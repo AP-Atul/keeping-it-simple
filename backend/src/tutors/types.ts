@@ -48,4 +48,5 @@ export interface SearchTutor {
   curriculum?: Curriculum
   subject?: string
   sort: TutorSortOrder
+  page: number
 }
