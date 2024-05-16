@@ -33,6 +33,6 @@ jobs:
       - name: Audit
         run: npm audit
       - name: Test
-        run: npm run test:cov
+        run: npm run test
         env:
           DB_TEST: postgres://postgres:postgres@postgres:5432/kis_test
