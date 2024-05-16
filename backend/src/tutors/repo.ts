@@ -33,6 +33,25 @@ export const save = async (tutor: SaveTutor, knex = db): Promise<Tutor | undefin
     .then((rows) => rows[0])
 }
 
+export const get = async (id: string): Promise<Tutor | undefined> => {
+  return await db
+    .select(`${tables.tutors}.*`, db.raw(`jsonb_agg(${tables.subjects}.*) as subjects`))
+    .from(tables.tutors)
+    .leftJoin(
+      tables.tutorsSubjects,
+      `${tables.tutors}.id`,
+      `${tables.tutorsSubjects}.tutor_id`
+    )
+    .leftJoin(
+      tables.subjects,
+      `${tables.tutorsSubjects}.subject_id`,
+      `${tables.subjects}.id`
+    )
+    .where(`${tables.tutors}.id`, '=', id)
+    .groupBy([`${tables.tutors}.id`])
+    .first<Tutor>()
+}
+
 export const search = async (options: SearchTutor) => {
   // joining tutors <> subjects <> tutors_subjects
   const offset = options.page > 0 ? config.pagination.limit * (options.page - 1) : 0

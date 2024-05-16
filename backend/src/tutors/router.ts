@@ -20,4 +20,21 @@ export const register = (server: hapi.Server): void => {
       notes: 'All fields are optional, default sorting = atar_desc'
     }
   })
+
+  server.route({
+    method: 'get',
+    path: '/tutors/{tutor}',
+    options: {
+      handler: overlook(handler.profile),
+      tags: ['api', 'tutors', 'profile'],
+      auth: {
+        scope: ['anon']
+      },
+      validate: {
+        params: schema.profile
+      },
+      description: 'Entire tutor profile',
+      notes: 'Requires tutor id to be a path parameter'
+    }
+  })
 }

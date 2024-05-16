@@ -1,5 +1,7 @@
 import { Curriculum } from '../subjects/types'
 
+export type TutorAPIResponses = 'tutor-not-found'
+
 export type TutorPricing = 'gold' | 'premium' | 'executive'
 
 export enum TutorSortOrder {
