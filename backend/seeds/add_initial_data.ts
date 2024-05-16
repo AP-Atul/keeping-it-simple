@@ -55,7 +55,7 @@ export async function seed(knex: Knex): Promise<void> {
         first_name: faker.person.firstName(),
         last_name: faker.person.lastName(),
         atar: faker.number.int({ min: 0, max: 100 }),
-        available: true,
+        available: faker.helpers.arrayElement([true, false]),
         bio: faker.lorem.sentence(),
         postcode: faker.location.zipCode(),
         price: faker.helpers.arrayElement<TutorPricing>(['executive', 'gold', 'premium']),
