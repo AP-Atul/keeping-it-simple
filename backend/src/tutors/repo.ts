@@ -60,7 +60,7 @@ export const search = async (options: SearchTutor) => {
   // joining tutors <> subjects <> tutors_subjects
   const offset = options.page > 0 ? config.pagination.limit * (options.page - 1) : 0
   const query = db
-    .select(`${tables.tutors}.*`, db.raw(`jsonb_agg(${tables.subjects}.*) as subjects`))
+    .select(`${tables.tutors}.*`)
     .from(tables.tutors)
     .leftJoin(
       tables.tutorsSubjects,
@@ -79,9 +79,12 @@ export const search = async (options: SearchTutor) => {
 
   // optional where clauses
   if (options.query) {
-    query
-      .whereILike('first_name', `%${options.query}%`)
-      .orWhereILike('last_name', `%${options.query}%`)
+    query.where(function () {
+      this.whereILike('first_name', `%${options.query}%`).orWhereILike(
+        'last_name',
+        `%${options.query}%`
+      )
+    })
   }
   if (options.price) {
     query.andWhere('price', '=', options.price)
@@ -96,7 +99,7 @@ export const search = async (options: SearchTutor) => {
     query.andWhere('curriculum', '=', options.curriculum)
   }
   if (options.subject) {
-    query.andWhereILike('subject', `%${options.subject}%`)
+    query.andWhereILike('subjects.name', `%${options.subject}%`)
   }
 
   // get the result
