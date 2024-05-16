@@ -16,3 +16,9 @@ export const search = joi
     page: joi.number().default(0)
   })
   .label('Search tutors')
+
+export const profile = joi
+  .object({
+    tutor: joi.string().uuid().required()
+  })
+  .label('Tutor profile id')
