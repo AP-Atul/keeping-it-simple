@@ -44,6 +44,11 @@ Achieve your academic potential
 
    - Improving search api to accept, variable no of options for each column (may be overkill)
 
+4. Web
+
+   - Ideally all values for filters should be fetched from backend with APIs. But in this case, we can keep it constants.
+   - Add a cross to remove the filter.
+
 ### Feature Improvements
 
 - Introduce reviews/ratings for tutors, students who have been tutored in the past can submit reviews for each tutor.
