@@ -7,7 +7,6 @@ import {
   Container,
   Dialog,
   Flex,
-  Spinner,
   Text,
   TextArea,
   TextField,
@@ -16,15 +15,19 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as tutorService from "../services/tutors";
 import { Profile } from "../types";
+import { FourOFour } from "../views/404/404";
+import { Loader } from "../views/loader/loader";
 
 export const TutorProfile = () => {
   const params = useParams<{ tutorId: string }>();
   const [profile, setProfile] = useState<Profile>();
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchProfile = async (id: string) => {
       const result = await tutorService.profile(id);
       if (result) setProfile(result);
+      else setError(true);
     };
 
     if (params.tutorId) {
@@ -32,19 +35,12 @@ export const TutorProfile = () => {
     }
   }, [params.tutorId]);
 
+  if (error) {
+    return <FourOFour />;
+  }
+
   if (!profile) {
-    return (
-      <>
-        <Container p={"2"} size="1">
-          <Flex justify="center">
-            <Button disabled>
-              <Spinner loading></Spinner>
-              Loading
-            </Button>
-          </Flex>
-        </Container>
-      </>
-    );
+    return <Loader />;
   }
 
   return (

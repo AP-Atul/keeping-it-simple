@@ -1,5 +1,6 @@
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import {
+  Box,
   Button,
   Container,
   Flex,
@@ -31,11 +32,12 @@ export const Home = () => {
   const [subject, setSubject] = useState<string>();
   const [school, setSchool] = useState<string>();
   const [sort, setSort] = useState<TutorSortOrder>(TutorSortOrder.atar_desc);
+  const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
     const fetchTutors = async () => {
       const result = await search({
-        page: 1,
+        page,
         sort,
         query,
         price,
@@ -48,7 +50,7 @@ export const Home = () => {
       }
     };
     fetchTutors();
-  }, [query, price, curriculum, subject, school, sort]);
+  }, [query, price, curriculum, subject, school, sort, page]);
 
   const tutorClicked = (tutorId: string) => {
     navigate(`/tutors/${tutorId}`, { preventScrollReset: false });
@@ -146,6 +148,35 @@ export const Home = () => {
             );
           })}
       </Grid>
+
+      <Flex justify={"center"} gap="3">
+        <Box my={"5"}>
+          <Button
+            color="gray"
+            variant="outline"
+            disabled={page < 2}
+            onClick={() => {
+              setPage(page - 1);
+              scrollTo({ top: 0 });
+            }}
+          >
+            Prev Page
+          </Button>
+        </Box>
+        <Box my={"5"}>
+          <Button
+            color="gray"
+            variant="outline"
+            disabled={tutors.length === 0}
+            onClick={() => {
+              setPage(page + 1);
+              scrollTo({ top: 0 });
+            }}
+          >
+            Next Page
+          </Button>
+        </Box>
+      </Flex>
     </Container>
   );
 };
