@@ -1,6 +1,6 @@
 import { Curriculum } from '../subjects/types'
 
-export type TutorAPIResponses = 'tutor-not-found'
+export type TutorAPIResponses = 'tutor-not-found' | 'tutor-requested'
 
 export type TutorPricing = 'gold' | 'premium' | 'executive'
 
