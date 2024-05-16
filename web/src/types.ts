@@ -35,3 +35,16 @@ export interface SearchTutor {
   sort: TutorSortOrder;
   page: number;
 }
+
+export interface Subject {
+  id: string;
+  created_at: string;
+  updated_at: string;
+  name: string;
+  description: string;
+  curriculum: Curriculum;
+}
+
+export interface Profile extends Tutor {
+  subjects: Subject[];
+}

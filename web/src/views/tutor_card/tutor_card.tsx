@@ -42,8 +42,8 @@ export const TutorCard = (props: TutorCardProps) => {
               {props.available ? "available" : "booked"}
             </Badge>
           </Flex>
-          <Text size="1" weight="light">
-            {props.bio}
+          <Text size="1" weight="light" trim="end">
+            {props.bio.substring(0, 100)}
           </Text>
         </Box>
       </Card>
