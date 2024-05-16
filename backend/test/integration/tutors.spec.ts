@@ -1,4 +1,5 @@
 import { expect } from 'chai'
+import { v4 as uuid } from 'uuid'
 import config from '../../src/config'
 import { Tutor } from '../../src/tutors/types'
 import { TestServerEnvironment, createSampleTutor, getTestEnv } from '../environment'
@@ -68,5 +69,32 @@ describe('tutor pagination', () => {
     })
     expect(response.statusCode).eq(200)
     expect(response.result).length(config.pagination.limit)
+  })
+})
+
+describe('tutor profile', () => {
+  it('should return tutor profile', async () => {
+    const tutor = await createSampleTutor()
+    const auth = await signin()
+    const response = await env.server.inject<Tutor>({
+      method: 'get',
+      url: `/tutors/${tutor.id}`,
+      headers: {
+        authorization: auth.auth_token
+      }
+    })
+    expect(response.statusCode).eq(200)
+    expect(response.result!.id).eq(tutor.id)
+  })
+  it('should return 404 when tutor missing', async () => {
+    const auth = await signin()
+    const response = await env.server.inject<Tutor>({
+      method: 'get',
+      url: `/tutors/${uuid()}`,
+      headers: {
+        authorization: auth.auth_token
+      }
+    })
+    expect(response.statusCode).eq(404)
   })
 })
