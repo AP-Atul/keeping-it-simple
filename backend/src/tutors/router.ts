@@ -37,4 +37,22 @@ export const register = (server: hapi.Server): void => {
       notes: 'Requires tutor id to be a path parameter'
     }
   })
+
+  server.route({
+    method: 'put',
+    path: '/tutors/{tutor}/request',
+    options: {
+      handler: overlook(handler.request),
+      tags: ['api', 'tutors', 'request'],
+      auth: {
+        scope: ['anon']
+      },
+      validate: {
+        params: schema.profile,
+        payload: schema.request
+      },
+      description: 'Make a tutor request',
+      notes: 'Requires tutor id to be a path parameter'
+    }
+  })
 }

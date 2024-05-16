@@ -33,6 +33,10 @@ export const save = async (tutor: SaveTutor, knex = db): Promise<Tutor | undefin
     .then((rows) => rows[0])
 }
 
+export const find = async (id: string): Promise<Tutor | undefined> => {
+  return await db(tables.tutors).select('*').where('id', '=', id).first<Tutor>()
+}
+
 export const get = async (id: string): Promise<Tutor | undefined> => {
   return await db
     .select(`${tables.tutors}.*`, db.raw(`jsonb_agg(${tables.subjects}.*) as subjects`))

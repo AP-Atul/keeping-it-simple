@@ -98,3 +98,37 @@ describe('tutor profile', () => {
     expect(response.statusCode).eq(404)
   })
 })
+
+describe('tutor request', () => {
+  it('should return 200 for successful request', async () => {
+    const tutor = await createSampleTutor()
+    const auth = await signin()
+    const response = await env.server.inject<Tutor>({
+      method: 'put',
+      url: `/tutors/${tutor.id}/request`,
+      payload: {
+        name: 'abc',
+        message: 'i am interested'
+      },
+      headers: {
+        authorization: auth.auth_token
+      }
+    })
+    expect(response.statusCode).eq(200)
+  })
+  it('should return 404 when tutor missing', async () => {
+    const auth = await signin()
+    const response = await env.server.inject<Tutor>({
+      method: 'put',
+      url: `/tutors/${uuid()}/request`,
+      payload: {
+        name: 'abc',
+        message: 'i am interested'
+      },
+      headers: {
+        authorization: auth.auth_token
+      }
+    })
+    expect(response.statusCode).eq(404)
+  })
+})
