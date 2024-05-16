@@ -8,6 +8,7 @@ import {
   TextField,
 } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   curriculums,
   prices,
@@ -22,6 +23,7 @@ import { Sort } from "../views/sort/sort";
 import { TutorCard } from "../views/tutor_card/tutor_card";
 
 export const Home = () => {
+  const navigate = useNavigate();
   const [tutors, setTutors] = useState<Tutor[]>([]);
   const [query, setQuery] = useState<string>();
   const [price, setPrice] = useState<TutorPricing>();
@@ -49,7 +51,7 @@ export const Home = () => {
   }, [query, price, curriculum, subject, school, sort]);
 
   const tutorClicked = (tutorId: string) => {
-    console.log("tutor clicked ", tutorId);
+    navigate(`/tutors/${tutorId}`, { preventScrollReset: false });
   };
 
   return (
