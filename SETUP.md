@@ -11,6 +11,7 @@
 
 3. Run the setup script
 
+   - `npm install`
    - `npm run setup`
    - this script will create database, run migrations, and setup `.env`
    - it will also seed the database
