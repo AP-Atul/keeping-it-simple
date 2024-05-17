@@ -28,8 +28,8 @@ Achieve your academic potential
 ### Challenges
 
 - No challenges in particular
-- Have implemented search functionality several times in different ways. I like to implement the search API exactly like it is now. Using knexjs, as sql query builder, it does give you bit of flexibility, not an orm, but there's a fun in writing raw queries (safe ones)
-- Frontend can be bit tricky, with all the UI component setup, CSS, libraries, and build systems. Getting this project setup was bit tedious and took a lot of time.
+- Have implemented search functionality several times in different ways. I like to implement the search API exactly like it is now. Using knexjs, as SQL query builder, does give you a bit of flexibility, not an orm, but there's fun in writing raw queries (safe ones)
+- Frontend can be a bit tricky, with all the UI component setup, CSS, libraries, and build systems. Getting this project set up was a bit tedious and took a lot of time.
 - I had a backend project setup, which I have reused and tweaked it as per my needs. I'm quite familiar with the hapi ecosystem at this point.
 
 ### Codebase Improvements
@@ -43,22 +43,22 @@ Achieve your academic potential
 2. Database
 
    - Introducing **RLS** for the tables
-   - Improving setup to use Role Based transactions with knex.js (needs research, but it will awesome 😎)
-   - Adding more constraint checks for values that we know will be of fix size/length
+   - Improving setup to use Role Based transactions with knex.js (needs research, but it will be awesome 😎)
+   - Adding more constraint checks for values that we know will be of fixed size/length
 
 3. API
 
-   - Improving search api to accept, variable number of options for each column (may be overkill)
+   - Improving search API to accept, a variable number of options for each column (may be overkill)
 
 4. Web
 
-   - Ideally all values for filters should be fetched from backend with APIs. But in this case, we can keep it constants.
+   - Ideally, all values for filters should be fetched from the backend with APIs. But in this case, we can keep it constant.
    - Add a cross icon to remove the filter.
    - Can add unit tests for widgets/views (react-testing-library)
-   - The UI is responsive, but can be polished even more.
+   - The UI is responsive but can be polished even more.
 
 ### Feature Improvements
 
 - Introduce reviews/ratings for tutors, students who have been tutored in the past can submit reviews for each tutor.
 - Add a sample lecture demo for students to view, how the tutor teaches.
-- May be add an integrated chat system between tutor and student even before getting started? (scammers)
+- Maybe add an integrated chat system between tutor and student even before getting started? (scammers)
