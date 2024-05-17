@@ -16,7 +16,7 @@
   "scripts": {
     "test": "lerna run test",
     "start": "lerna run start",
-    "db:setup": "lerna run db:setup"
+    "setup": "lerna run setup"
   },
   "dependencies": {},
   "devDependencies": {
