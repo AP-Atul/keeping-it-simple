@@ -1,4 +1,4 @@
-## SeriesO
+## KIS
 
 A simple REST service.
 
